@@ -56855,8 +56855,8 @@
 "iasp_c":1.0,
 "o2_c":-1.0
 },
-"lower_bound":0,
-"upper_bound":0,
+"lower_bound":0.0,
+"upper_bound":1000.0,
 "gene_reaction_rule":"STM2641",
 "annotation":{
 "bigg.reaction":"ASPO6",
@@ -95793,8 +95793,8 @@
 "pgp140_p":-1.0,
 "pi_p":1.0
 },
-"lower_bound":0,
-"upper_bound":0,
+"lower_bound":0.0,
+"upper_bound":1000.0,
 "gene_reaction_rule":"STM1710 or STM0420",
 "annotation":{
 "bigg.reaction":"PGPP140pp",
@@ -95976,8 +95976,8 @@
 "pgp160_p":-1.0,
 "pi_p":1.0
 },
-"lower_bound":0,
-"upper_bound":0,
+"lower_bound":0.0,
+"upper_bound":1000.0,
 "gene_reaction_rule":"STM0420 or STM1710",
 "annotation":{
 "bigg.reaction":"PGPP160pp",
@@ -96037,8 +96037,8 @@
 "pgp161_p":-1.0,
 "pi_p":1.0
 },
-"lower_bound":0,
-"upper_bound":0,
+"lower_bound":0.0,
+"upper_bound":1000.0,
 "gene_reaction_rule":"STM1710 or STM0420",
 "annotation":{
 "bigg.reaction":"PGPP161pp",
@@ -96180,8 +96180,8 @@
 "pgp180_p":-1.0,
 "pi_p":1.0
 },
-"lower_bound":0,
-"upper_bound":0,
+"lower_bound":0.0,
+"upper_bound":1000.0,
 "gene_reaction_rule":"STM1710 or STM0420",
 "annotation":{
 "bigg.reaction":"PGPP180pp",
@@ -96219,8 +96219,8 @@
 "pgp181_p":-1.0,
 "pi_p":1.0
 },
-"lower_bound":0,
-"upper_bound":0,
+"lower_bound":0.0,
+"upper_bound":1000.0,
 "gene_reaction_rule":"STM0420 or STM1710",
 "annotation":{
 "bigg.reaction":"PGPP181pp",
@@ -97029,8 +97029,8 @@
 "pi_c":2.0,
 "pi_p":-1.0
 },
-"lower_bound":0,
-"upper_bound":0,
+"lower_bound":0.0,
+"upper_bound":1000.0,
 "gene_reaction_rule":"STM3855 and STM3854 and STM3856 and STM3857",
 "annotation":{
 "bigg.reaction":"PIuabcpp",
@@ -115394,8 +115394,8 @@
 "udcpdp_p":24.0,
 "udcpo5_p":-25.0
 },
-"lower_bound":0,
-"upper_bound":0,
+"lower_bound":0.0,
+"upper_bound":1000.0,
 "gene_reaction_rule":"STM1332 and STM2079",
 "annotation":{
 "bigg.reaction":"OA5L_ST",
