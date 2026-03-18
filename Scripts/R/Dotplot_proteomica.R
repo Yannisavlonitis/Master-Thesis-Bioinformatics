@@ -1,0 +1,274 @@
+setwd("//wsl.localhost/Ubuntu/home/yannis/CNB/CNB/Data/Proteomica_Salmonella")
+
+# Bibliotecas
+library(dplyr) #%>%
+library(ggplot2)
+
+
+# Importo el dataset
+library(readxl)
+proteomica <- read_excel("//wsl.localhost/Ubuntu/home/yannis/CNB/CNB/Data/Proteomica_Salmonella/PROTEOMICA-LppA-LppB-Salmonella_v2.xlsx")
+View(proteomica)
+
+# Normalizo logaritmicamente cada condicion
+proteomica_log[c( "ΔlppA early","ΔlppB early", "WT early", "ΔlppA late","ΔlppB late", "WT late")] <- log2(proteomica[c( "ΔlppA early","ΔlppB early", "WT early", "ΔlppA late","ΔlppB late", "WT late")])
+View(proteomica_log) # E quedo con un df sin los Proteingroups ni IDs
+
+proteomica_completa <- cbind(proteomica[, 1:2], proteomica_log) # Añado los Proteingroups y IDs
+View(proteomica_completa)
+
+# Comparo con el logFC (LFC = log2(A/B) = log2(A) - log2(B)) y p-value
+# logFC > 0 = aumenta expresion. > 1 = aumenta fuerte
+# logFC = 0 = misma expresión
+# logFC < 0 = menor expresion. < 1 = disminuye fuerte
+
+### EARLY
+
+## A early vs B early
+AB_early <- proteomica_completa[, c("PG.ProteinGroups", "STM_ID", "ΔlppA early","ΔlppB early")] %>% # Creo un df solo con las condiciones deseadas
+  mutate(logFC = `ΔlppA early` - `ΔlppB early`) # Añado columna del LogFC
+
+# 1. Usamos un umbral de 1 para ver si se expresan mas en A, B o no hay cambio
+df_ABE <- AB_early %>%
+  mutate(change = case_when( # Añado columna de cambios
+    logFC > 1 ~ "Sube en A", # Mayor que 1
+    logFC < -1 ~ "Sube en B", # Menor que -1
+    TRUE ~ "Sin cambio" # Entre -1 y 1
+  ))
+
+View(df_ABE) 
+
+# 2. Generar el gráfico
+ggplot(df_ABE, aes(x = `ΔlppB early`, y = `ΔlppA early`, color = change)) +
+  geom_point(alpha = 0.5, 
+             size = 1) +
+  # Línea de identidad (y = x)
+  geom_abline(slope = 1, # Inclinacion
+              intercept = 0, # Altura de la diagonal 
+              linetype = "dashed", # Linea punteada
+              color = "black") +
+  # Escala de colores
+  scale_color_manual(values = c("Sube en A" = "red", 
+                                "Sube en B" = "darkblue", 
+                                "Sin cambio" = "lightgrey")) +
+  # Etiquetas de texto para las proteínas más extremas (opcional)
+  geom_text(data = filter(df_ABE, abs(logFC) > 1), 
+            aes(label = STM_ID), 
+            vjust = -1, size = 2, check_overlap = TRUE) +
+  labs(title = "Comparación de expresión proteómica ΔlppA early - ΔlppB early ",
+       subtitle = "La línea punteada indica logFC = 0",
+       x = "Intensidad en ΔlppB",
+       y = "Intensidad en ΔlppA",
+       color = "Cambio") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+  
+
+## B early vs WT early
+BWT_early <- proteomica_completa[, c("PG.ProteinGroups", "STM_ID", "ΔlppB early","WT early")] %>% # Creo un df solo con las condiciones deseadas
+  mutate(logFC = `ΔlppB early` - `WT early`) # Añado columna del LogFC
+
+# 1. Usamos un umbral de 1 
+df_BWT <- BWT_early %>%
+  mutate(change = case_when( # Añado columna de cambios
+    logFC > 1 ~ "Sube en B", # Mayor que 1
+    logFC < -1 ~ "Sube en WT", # Menor que -1
+    TRUE ~ "Sin cambio" # Entre -1 y 1
+  ))
+
+View(df_BWT) 
+
+# 2. Generar el gráfico
+ggplot(df_BWT, aes(x = `WT early`, 
+                   y = `ΔlppB early`, 
+                   color = change)) +
+  geom_point(alpha = 0.5, 
+             size = 1) +
+  # Línea de identidad (y = x)
+  geom_abline(slope = 1, # Inclinacion
+              intercept = 0, # Altura de la diagonal 
+              linetype = "dashed", # Linea punteada
+              color = "black") +
+  # Escala de colores
+  scale_color_manual(values = c("Sube en B" = "red", 
+                                "Sube en WT" = "darkblue", 
+                                "Sin cambio" = "lightgrey")) +
+  # Etiquetas de texto para las proteínas más extremas (opcional)
+  geom_text(data = filter(df_BWT, abs(logFC) > 1), 
+            aes(label = STM_ID), 
+            vjust = -1, size = 2, check_overlap = TRUE) +
+  labs(title = "Comparación de expresión proteómica ΔlppB early - WT early ",
+       subtitle = "La línea punteada indica logFC = 0",
+       x = "Intensidad en WT",
+       y = "Intensidad en ΔlppB",
+       color = "Cambio") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+
+## A early vs WT early
+AWT_early <- proteomica_completa[, c("PG.ProteinGroups", "STM_ID", "ΔlppA early","WT early")] %>% # Creo un df solo con las condiciones deseadas
+  mutate(logFC = `ΔlppA early` - `WT early`) # Añado columna del LogFC
+
+# 1. Usamos un umbral de 1 
+df_AWTE <- AWT_early %>%
+  mutate(change = case_when( # Añado columna de cambios
+    logFC > 1 ~ "Sube en A", # Mayor que 1
+    logFC < -1 ~ "Sube en WT", # Menor que -1
+    TRUE ~ "Sin cambio" # Entre -1 y 1
+  ))
+
+View(df_AWTE) 
+
+# 2. Generar el gráfico
+ggplot(df_AWTE, aes(x = `WT early`, y = `ΔlppA early`, color = change)) +
+  geom_point(alpha = 0.5, 
+             size = 1) +
+  # Línea de identidad (y = x)
+  geom_abline(slope = 1, # Inclinacion
+              intercept = 0, # Altura de la diagonal 
+              linetype = "dashed", # Linea punteada
+              color = "black") +
+  # Escala de colores
+  scale_color_manual(values = c("Sube en A" = "red", 
+                                "Sube en WT" = "darkblue", 
+                                "Sin cambio" = "lightgrey")) +
+  # Etiquetas de texto para las proteínas más extremas (opcional)
+  geom_text(data = filter(df_AWTE, abs(logFC) > 1), 
+            aes(label = STM_ID), 
+            vjust = -1, size = 2, check_overlap = TRUE) +
+  labs(title = "Comparación de expresión proteómica ΔlppA early - WT early ",
+       subtitle = "La línea punteada indica logFC = 0",
+       x = "Intensidad en WT",
+       y = "Intensidad en ΔlppA",
+       color = "Cambio") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+
+
+### LATE
+
+## A late vs B late
+AB_late <- proteomica_completa[, c("PG.ProteinGroups", "STM_ID", "ΔlppA late","ΔlppB late")] %>% # Creo un df solo con las condiciones deseadas
+  mutate(logFC = `ΔlppA late` - `ΔlppB late`) # Añado columna del LogFC
+
+# 1. Usamos un umbral de 1 para ver si se expresan mas en A, B o no hay cambio
+df_ABL <- AB_late %>%
+  mutate(change = case_when( # Añado columna de cambios
+    logFC > 1 ~ "Sube en A", # Mayor que 1
+    logFC < -1 ~ "Sube en B", # Menor que -1
+    TRUE ~ "Sin cambio" # Entre -1 y 1
+  ))
+
+View(df_ABL) 
+
+# 2. Generar el gráfico
+ggplot(df_ABL, aes(x = `ΔlppB late`, y = `ΔlppA late`, color = change)) +
+  geom_point(alpha = 0.5, 
+             size = 1) +
+  # Línea de identidad (y = x)
+  geom_abline(slope = 1, # Inclinacion
+              intercept = 0, # Altura de la diagonal 
+              linetype = "dashed", # Linea punteada
+              color = "black") +
+  # Escala de colores
+  scale_color_manual(values = c("Sube en A" = "red", 
+                                "Sube en B" = "darkblue", 
+                                "Sin cambio" = "lightgrey")) +
+  # Etiquetas de texto para las proteínas más extremas (opcional)
+  geom_text(data = filter(df_ABL, abs(logFC) > 1), 
+            aes(label = STM_ID), 
+            vjust = -1, size = 2, check_overlap = TRUE) +
+  labs(title = "Comparación de expresión proteómica ΔlppA late - ΔlppB late ",
+       subtitle = "La línea punteada indica logFC = 0",
+       x = "Intensidad en ΔlppB",
+       y = "Intensidad en ΔlppA",
+       color = "Cambio") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+## B late vs WT late
+BWT_late <- proteomica_completa[, c("PG.ProteinGroups", "STM_ID", "ΔlppB late","WT late")] %>% # Creo un df solo con las condiciones deseadas
+  mutate(logFC = `ΔlppB late` - `WT late`) # Añado columna del LogFC
+
+# 1. Usamos un umbral de 1 
+df_BWTL <- BWT_late %>%
+  mutate(change = case_when( # Añado columna de cambios
+    logFC > 1 ~ "Sube en B", # Mayor que 1
+    logFC < -1 ~ "Sube en WT", # Menor que -1
+    TRUE ~ "Sin cambio" # Entre -1 y 1
+  ))
+
+View(df_BWTL) 
+
+# 2. Generar el gráfico
+ggplot(df_BWTL, aes(x = `WT late`, 
+                   y = `ΔlppB late`, 
+                   color = change)) +
+  geom_point(alpha = 0.5, 
+             size = 1) +
+  # Línea de identidad (y = x)
+  geom_abline(slope = 1, # Inclinacion
+              intercept = 0, # Altura de la diagonal 
+              linetype = "dashed", # Linea punteada
+              color = "black") +
+  # Escala de colores
+  scale_color_manual(values = c("Sube en B" = "red", 
+                                "Sube en WT" = "darkblue", 
+                                "Sin cambio" = "lightgrey")) +
+  # Etiquetas de texto para las proteínas más extremas (opcional)
+  geom_text(data = filter(df_BWTL, abs(logFC) > 1), 
+            aes(label = STM_ID), 
+            vjust = -1, size = 2, check_overlap = TRUE) +
+  labs(title = "Comparación de expresión proteómica ΔlppB late - WT late ",
+       subtitle = "La línea punteada indica logFC = 0",
+       x = "Intensidad en WT",
+       y = "Intensidad en ΔlppB",
+       color = "Cambio") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+## A late vs WT late
+
+AWT_late <- proteomica_completa[, c("PG.ProteinGroups", "STM_ID", "ΔlppA late","WT late")] %>% # Creo un df solo con las condiciones deseadas
+  mutate(logFC = `ΔlppA late` - `WT late`) # Añado columna del LogFC
+
+# 1. Usamos un umbral de 1 
+df_AWTL <- AWT_late %>%
+  mutate(change = case_when( # Añado columna de cambios
+    logFC > 1 ~ "Sube en A", # Mayor que 1
+    logFC < -1 ~ "Sube en WT", # Menor que -1
+    TRUE ~ "Sin cambio" # Entre -1 y 1
+  ))
+
+View(df_AWTL) 
+
+# 2. Generar el gráfico
+ggplot(df_AWTL, aes(x = `WT late`, y = `ΔlppA late`, color = change)) +
+  geom_point(alpha = 0.5, 
+             size = 1) +
+  # Línea de identidad (y = x)
+  geom_abline(slope = 1, # Inclinacion
+              intercept = 0, # Altura de la diagonal 
+              linetype = "dashed", # Linea punteada
+              color = "black") +
+  # Escala de colores
+  scale_color_manual(values = c("Sube en A" = "red", 
+                                "Sube en WT" = "darkblue", 
+                                "Sin cambio" = "lightgrey")) +
+  # Etiquetas de texto para las proteínas más extremas (opcional)
+  geom_text(data = filter(df_AWTL, abs(logFC) > 1), 
+            aes(label = STM_ID), 
+            vjust = -1, size = 2, check_overlap = TRUE) +
+  labs(title = "Comparación de expresión proteómica ΔlppA early - WT early ",
+       subtitle = "La línea punteada indica logFC = 0",
+       x = "Intensidad en WT",
+       y = "Intensidad en ΔlppA",
+       color = "Cambio") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+
+
