@@ -1,6 +1,6 @@
 ---
 title: "Analisis_Enriquecimiento"
-author: "DSLG, Yannis Avlonitis Egea"
+author: "Yannis Avlonitis Egea"
 date: "19/03/2026"
 output: html_document
 ---
@@ -64,6 +64,9 @@ for (comparison in comparisons) {
       theme(axis.text.x = element_text(angle = 45, hjust = 1))
     
     print(p) # Obligatorio dentro de un loop
+    
+    print(dotplot(comparison_prot_KEGG, showCategory = 15) + 
+            ggtitle(paste("KEGG Dotplot:", comparison)))
     
   } else {
     message(paste("No se encontraron rutas significativas para:", comparison))
