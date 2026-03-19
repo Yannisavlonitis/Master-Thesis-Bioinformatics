@@ -1,0 +1,73 @@
+---
+title: "Analisis_Enriquecimiento"
+author: "DSLG, Yannis Avlonitis Egea"
+date: "19/03/2026"
+output: html_document
+---
+
+```{r, echo=FALSE}
+setwd("//wsl.localhost/Ubuntu/home/yannis/CNB/CNB/Data/Salmonella_gurobi")
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+setwd("//wsl.localhost/Ubuntu/home/yannis/CNB/CNB/Data/Salmonella_gurobi")
+
+BiocManager::install("clusterProfiler")
+library(clusterProfiler)
+library(ggplot2)
+
+proteomics <- read.csv("proteomics_data_transformed.csv",sep="\t")
+View(proteomics)
+
+comparisons=c("WT.early.vs.ΔlppA.early",
+              "WT.late.vs.ΔlppA.late",
+              "WT.late.vs.ΔlppB.late",
+              "WT.early.vs.ΔlppB.early",
+              "ΔlppA.early.vs.ΔlppB.early",
+              "ΔlppA.late.vs.ΔlppB.late")
+
+```
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+for (comparison in comparisons) {
+  message(paste("Analizando:", comparison))
+  
+  # 1. Filtrar IDs (asegurando que sea un vector de caracteres y sin NAs)
+  comparison_prot <- proteomics$STM_ID[which(proteomics[[comparison]] > 2)] # # Usamos > 2 asumiendo que es un logFC o intensidad umbral
+  
+  # Validar si hay proteínas suficientes para intentar el enriquecimiento
+  #if(length(comparison_prot) < 5) {
+   # message("Saltando: Muy pocas proteínas encontradas.")
+  #  next
+#  }
+  
+  # 2. Ejecutar enrichKEGG
+  comparison_prot_KEGG <- enrichKEGG(
+    gene = comparison_prot,
+    organism = "stm",       # Salmonella Typhimurium LT2
+    keyType = "kegg",
+    pvalueCutoff = 0.05, # p valor de corte
+    universe = proteomics$STM_ID, # IDs
+    minGSSize = 10, # Minimum Gene Set Size: n minimo de genes que tiene que tener una ruta para ser considerada
+    maxGSSize = 500, # Minimum Gene Set Size: n maximo de genes que tiene que tener una ruta para ser considerada
+    qvalueCutoff = 0.2, # Controla la Tasa de Descubrimiento Falso
+    use_internal_data = FALSE)
+  
+  # 3. Comprobar si hay resultados antes de graficar
+  if (!is.null(comparison_prot_KEGG) && nrow(comparison_prot_KEGG@result[comparison_prot_KEGG@result$p.adjust < 0.05, ]) > 0) {
+    
+    p <- barplot(comparison_prot_KEGG, showCategory = 15) + 
+      ggtitle(paste("KEGG enrichment for", comparison)) + 
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+    
+    print(p) # Obligatorio dentro de un loop
+    
+  } else {
+    message(paste("No se encontraron rutas significativas para:", comparison))
+  }
+}
+```
+
