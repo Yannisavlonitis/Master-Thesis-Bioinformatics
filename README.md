@@ -21,15 +21,17 @@ Key Libraries (R): tidyverse, ggplot2 (Statistical data visualization).
 Version Control: Git / GitHub
 
 📂 Project Structure
-├── data/               # Metabolic models (SBML), genomes, and raw datasets.
-├── scripts/            # Data processing scripts and simulations.
-│   ├── python/         # FBA (Flux Balance Analysis) and modeling scripts.
-│   └── R/              # Post-processing and statistical visualization.
-├── notebooks/          # Jupyter Notebooks with exploratory data analysis.
-├── results/            # Generated plots, flux tables, and reports.
-├── environment.yml     # Conda configuration file for reproducibility.
-└── README.md
-
+```text
+.
+├── data/               # Metabolic models (SBML) and raw datasets
+├── scripts/            # Core analysis pipelines
+│   ├── python/         # FBA simulations and modeling
+│   └── R/              # Statistical analysis and plotting
+├── notebooks/          # Jupyter Notebooks for EDA
+├── results/            # Figures, flux tables, and reports
+├── environment.yml     # Conda environment for reproducibility
+└── README.md           # Project documentation
+```
 🚀 Key Features
 Metabolic Reconstruction: Refinement of Genome-Scale Models (GEMs).
 
