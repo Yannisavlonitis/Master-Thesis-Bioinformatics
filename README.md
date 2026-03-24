@@ -1,11 +1,7 @@
-Perfect. Since you're applying for an international position at Bertelsmann, having your repository in English is a massive plus—it shows you’re ready to work in global environments.
-
 Modeling and Analysis of Synthetic Microbial Consortia 🧬💻
 Master's Thesis (MSc) | Bioinformatics 
 Author: Yannis Avlonitis Egea
-
 Institution: CNB-CSIC - Systems Biotechnology Laboratory
-
 Academic Program: Master’s Degree in Bioinformatics 
 
 📝 Project Overview
@@ -25,7 +21,6 @@ Key Libraries (R): tidyverse, ggplot2 (Statistical data visualization).
 Version Control: Git / GitHub
 
 📂 Project Structure
-Plaintext
 ├── data/               # Metabolic models (SBML), genomes, and raw datasets.
 ├── scripts/            # Data processing scripts and simulations.
 │   ├── python/         # FBA (Flux Balance Analysis) and modeling scripts.
@@ -34,6 +29,7 @@ Plaintext
 ├── results/            # Generated plots, flux tables, and reports.
 ├── environment.yml     # Conda configuration file for reproducibility.
 └── README.md
+
 🚀 Key Features
 Metabolic Reconstruction: Refinement of Genome-Scale Models (GEMs).
 
