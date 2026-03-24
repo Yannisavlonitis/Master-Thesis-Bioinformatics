@@ -5,11 +5,13 @@ Institution: CNB-CSIC - Systems Biotechnology Laboratory
 Academic Program: Master’s Degree in Bioinformatics 
 
 📝 Project Overview
+
 This repository contains the code, metabolic models, and analysis pipelines for my Master’s Thesis. The project focuses on metabolic modeling and the analysis of synthetic microbial consortia using Systems Biology approaches.
 
 The primary objective is to predict metabolic interactions and the stability of microbial communities through computational tools, facilitating the design of optimized consortia for biotechnological applications.
 
 🛠️ Tech Stack & Tools
+
 Languages: Python 3.x, R
 
 Environment: Anaconda / Conda
@@ -33,6 +35,7 @@ Version Control: Git / GitHub
 └── README.md           # Project documentation
 ```
 🚀 Key Features
+
 Metabolic Reconstruction: Refinement of Genome-Scale Models (GEMs).
 
 Flux Balance Analysis (FBA): Simulation of growth rates and metabolite secretion predictions.
@@ -42,6 +45,7 @@ Consortia Modeling: Implementation of compartmentalized models to study cooperat
 Data Visualization: Dashboards and heatmaps to interpret population dynamics.
 
 ⚙️ Installation & Setup
+
 To replicate the analysis environment, ensure you have Conda installed and run:
 
 Bash
