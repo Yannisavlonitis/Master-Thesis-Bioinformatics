@@ -1,16 +1,19 @@
-Modeling and Analysis of Synthetic Microbial Consortia 🧬💻
-Master's Thesis (MSc) | Bioinformatics 
-Author: Yannis Avlonitis Egea
-Institution: CNB-CSIC - Systems Biotechnology Laboratory
-Academic Program: Master’s Degree in Bioinformatics 
+# Modeling and Analysis of Synthetic Microbial Consortia 🧬💻
 
-📝 Project Overview
+Master's Thesis (MSc) | Bioinformatics 
+
+Author: Yannis Avlonitis Egea
+
+Institution: CNB-CSIC - Systems Biotechnology Laboratory
+
+
+## 📝 Project Overview
 
 This repository contains the code, metabolic models, and analysis pipelines for my Master’s Thesis. The project focuses on metabolic modeling and the analysis of synthetic microbial consortia using Systems Biology approaches.
 
 The primary objective is to predict metabolic interactions and the stability of microbial communities through computational tools, facilitating the design of optimized consortia for biotechnological applications.
 
-🛠️ Tech Stack & Tools
+## 🛠️ Tech Stack & Tools
 
 Languages: Python 3.x, R
 
@@ -22,7 +25,7 @@ Key Libraries (R): tidyverse, ggplot2 (Statistical data visualization).
 
 Version Control: Git / GitHub
 
-📂 Project Structure
+## 📂 Project Structure
 ```text
 .
 ├── data/               # Metabolic models (SBML) and raw datasets
@@ -34,7 +37,7 @@ Version Control: Git / GitHub
 ├── environment.yml     # Conda environment for reproducibility
 └── README.md           # Project documentation
 ```
-🚀 Key Features
+## 🚀 Key Features
 
 Metabolic Reconstruction: Refinement of Genome-Scale Models (GEMs).
 
@@ -44,14 +47,17 @@ Consortia Modeling: Implementation of compartmentalized models to study cooperat
 
 Data Visualization: Dashboards and heatmaps to interpret population dynamics.
 
-⚙️ Installation & Setup
+## ⚙️ Installation & Setup
 
 To replicate the analysis environment, ensure you have Conda installed and run:
 
 Bash
+
 conda env create -f environment.yml
+
 conda activate tfm-bioinfo-env
-📧 Contact
+
+## 📧 Contact
 Yannis Avlonitis Egea 📍 Madrid, Spain
 
 📩 yannisavlonitisae@gmail.com
