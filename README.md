@@ -1,4 +1,4 @@
-# Modeling and Analysis of Synthetic Microbial Consortia 🧬💻
+# Modeling and Analysis of Synthetic Microbial Consortia 
 
 Master's Thesis (MSc) | Bioinformatics 
 
