@@ -1,0 +1,59 @@
+Perfect. Since you're applying for an international position at Bertelsmann, having your repository in English is a massive plus—it shows you’re ready to work in global environments.
+
+Modeling and Analysis of Synthetic Microbial Consortia 🧬💻
+Master's Thesis (MSc) | Bioinformatics 
+Author: Yannis Avlonitis Egea
+
+Institution: CNB-CSIC - Systems Biotechnology Laboratory
+
+Academic Program: Master’s Degree in Bioinformatics 
+
+📝 Project Overview
+This repository contains the code, metabolic models, and analysis pipelines for my Master’s Thesis. The project focuses on metabolic modeling and the analysis of synthetic microbial consortia using Systems Biology approaches.
+
+The primary objective is to predict metabolic interactions and the stability of microbial communities through computational tools, facilitating the design of optimized consortia for biotechnological applications.
+
+🛠️ Tech Stack & Tools
+Languages: Python 3.x, R
+
+Environment: Anaconda / Conda
+
+Key Libraries (Python): COBRApy (Constraint-Based Reconstruction and Analysis), pandas, numpy, matplotlib.
+
+Key Libraries (R): tidyverse, ggplot2 (Statistical data visualization).
+
+Version Control: Git / GitHub
+
+📂 Project Structure
+Plaintext
+├── data/               # Metabolic models (SBML), genomes, and raw datasets.
+├── scripts/            # Data processing scripts and simulations.
+│   ├── python/         # FBA (Flux Balance Analysis) and modeling scripts.
+│   └── R/              # Post-processing and statistical visualization.
+├── notebooks/          # Jupyter Notebooks with exploratory data analysis.
+├── results/            # Generated plots, flux tables, and reports.
+├── environment.yml     # Conda configuration file for reproducibility.
+└── README.md
+🚀 Key Features
+Metabolic Reconstruction: Refinement of Genome-Scale Models (GEMs).
+
+Flux Balance Analysis (FBA): Simulation of growth rates and metabolite secretion predictions.
+
+Consortia Modeling: Implementation of compartmentalized models to study cooperation/competition between strains.
+
+Data Visualization: Dashboards and heatmaps to interpret population dynamics.
+
+⚙️ Installation & Setup
+To replicate the analysis environment, ensure you have Conda installed and run:
+
+Bash
+conda env create -f environment.yml
+conda activate tfm-bioinfo-env
+📧 Contact
+Yannis Avlonitis Egea 📍 Madrid, Spain
+
+📩 yannisavlonitisae@gmail.com
+
+🔗 LinkedIn Profile | GitHub Portfolio
+
+Project developed within the Synthetic Biology Group at the National Center for Biotechnology (CNB-CSIC).
