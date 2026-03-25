@@ -66769,8 +66769,8 @@
 "metabolites":{
 "ac_e":-1.0
 },
-"lower_bound":0.0,
-"upper_bound":1000.0,
+"lower_bound":0.43,
+"upper_bound":0.43,
 "gene_reaction_rule":"",
 "annotation":{
 "bigg.reaction":"EX_ac_e",
@@ -68670,8 +68670,8 @@
 "metabolites":{
 "for_e":-1.0
 },
-"lower_bound":0.0,
-"upper_bound":1000.0,
+"lower_bound":0,
+"upper_bound":0,
 "gene_reaction_rule":"",
 "annotation":{
 "bigg.reaction":"EX_for_e",
@@ -71080,7 +71080,7 @@
 "metabolites":{
 "glc__D_e":-1.0
 },
-"lower_bound":-5.0,
+"lower_bound":-21.69,
 "upper_bound":1000.0,
 "gene_reaction_rule":"",
 "annotation":{
@@ -80279,8 +80279,8 @@
 "metabolites":{
 "lac__D_e":-1.0
 },
-"lower_bound":0.0,
-"upper_bound":1000.0,
+"lower_bound":0,
+"upper_bound":0,
 "gene_reaction_rule":"",
 "annotation":{
 "bigg.reaction":"EX_lac__D_e",
@@ -113121,8 +113121,8 @@
 "val__L_c":-0.284577,
 "zn2_c":-0.003158
 },
-"lower_bound":0.0,
-"upper_bound":1000.0,
+"lower_bound":0,
+"upper_bound":0.024,
 "gene_reaction_rule":"",
 "objective_coefficient":1.0,
 "annotation":{
